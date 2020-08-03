@@ -1,0 +1,64 @@
+package io.nasko222.name.randomcreeper;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class startCommand implements CommandExecutor {
+
+	private Main plugin;
+	public boolean isRunning = false;
+
+	public startCommand(Main plugin) {
+		this.plugin = plugin;
+		plugin.getCommand("startcreeper").setExecutor(this);
+	}
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			sender.sendMessage("Console cannot use this command!");
+			return false;
+		}
+		Player p = (Player) sender;
+		if (!p.isOp()) {
+			p.sendMessage("You need to be op to start my creeper plugin!");
+			return false;
+		}
+		else if (!isRunning) {
+			p.sendMessage("Turned on!");
+			isRunning = true;
+	        Bukkit.getScheduler().runTaskTimer(plugin, new Runnable()
+	        {
+	        	if (!isRunning)
+	        	{
+	        		return false;
+	        	}
+	            int time = 10;
+
+	            @Override
+	            public void run()
+	            {
+	                if (this.time == 0)
+	                {
+	                    return;
+	                }
+	               
+	                for (final Player player : Bukkit.getOnlinePlayers())
+	                {
+	                    player.sendMessage(this.time + " second(s) remains!");
+	                }
+	               
+	                this.time--;
+	            }
+	        }, 0L, 20L);
+	        return false;
+		}
+		else if (isRunning) {
+			p.sendMessage("Turned off!");
+			isRunning = false;
+			return false;
+		}
+		return true;
+	}
+}

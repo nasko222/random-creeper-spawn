@@ -1,0 +1,10 @@
+name: RandomCreeper
+version: 1.0
+author: nasko222
+main: io.nasko222.name.randomcreeper.Main
+description: random creeper spawning in front of you
+
+commands:
+  startcreeper:
+   aliases: [sc]
+   description: starts the creeper plugin

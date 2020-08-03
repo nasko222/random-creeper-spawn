@@ -1,0 +1,9 @@
+name: RandomCreeper
+version: 1.0
+author: nasko222
+main: io.nasko222.name.randomcreeper.Main
+description: random creeper spawning in front of you
+
+commands:
+  creeper:
+   description: Starts/Stops the creeper mode.
